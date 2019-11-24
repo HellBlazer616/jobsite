@@ -14,13 +14,11 @@ class Applicant
      * @return mixed
      */
     public function handle($request, Closure $next)
-    { {
-
-            if (Auth::check() && Auth::user()->isApplicant()) {
-                return $next($request);
-            }
-
-            return redirect('home');
+    {
+        if (Auth::check() && Auth::user()->isApplicant()) {
+            return $next($request);
         }
+
+        return redirect('home');
     }
 }

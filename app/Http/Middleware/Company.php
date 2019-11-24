@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+
+use Auth;
 use Closure;
 
 class Company
@@ -15,11 +17,11 @@ class Company
      */
     public function handle($request, Closure $next)
     {
-
-        if (Auth::check() && Auth::user()->isCompany()) {
-            return $next($request);
+        dd(Auth::guard('web')->check());
+        if (true == Auth::guard('company')->check()) {
+            return redirect()->route('view.login.admin');
         }
 
-        return redirect('home');
+        return $next($request);
     }
 }
